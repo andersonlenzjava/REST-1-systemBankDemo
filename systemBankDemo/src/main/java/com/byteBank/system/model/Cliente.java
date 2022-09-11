@@ -1,21 +1,18 @@
 package com.byteBank.system.model;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Client")
 public class Cliente {
 
-	private Long id;
 	Pessoa pessoa;
 	Conta conta;
 	
 	public Cliente(Pessoa pessoa, Conta conta) {
 		this.pessoa = pessoa;
 		this.conta = conta;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public Pessoa getPessoa() {
 		return pessoa;

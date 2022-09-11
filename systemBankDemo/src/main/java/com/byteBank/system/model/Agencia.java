@@ -1,7 +1,14 @@
 package com.byteBank.system.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Agencia {
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	public String numero;
 	public String nome;
@@ -9,8 +16,7 @@ public class Agencia {
 	public String cep;
 	public Long numeroPredio;
 	
-	public Agencia(Long id, String numero, String rua, String nome, String cep, Long numeroPredio) {
-		this.id = id;
+	public Agencia(String numero, String nome, String rua, String cep, Long numeroPredio) {
 		this.numero = numero;
 		this.rua = rua;
 		this.nome = nome;

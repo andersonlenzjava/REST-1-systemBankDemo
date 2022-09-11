@@ -2,9 +2,13 @@ package com.byteBank.system.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Gert")
 public class Gerente {
 
-	private Long id;
 	Pessoa pessoa;
 	StatusTrabalho status;
 	Agencia agencia;
@@ -37,11 +41,5 @@ public class Gerente {
 	}
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 }
