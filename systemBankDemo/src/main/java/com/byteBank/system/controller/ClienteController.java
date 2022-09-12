@@ -20,45 +20,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.byteBank.system.dto.GerenteDto;
+import com.byteBank.system.dto.ClienteDto;
+import com.byteBank.system.form.ClienteForm;
 import com.byteBank.system.form.GerenteForm;
-import com.byteBank.system.service.GerenteService;
+import com.byteBank.system.service.ClienteService;
 
 @RestController
-@RequestMapping("/gerentes")
-public class GerenteController {
+@RequestMapping("/clientes")
+public class ClienteController {
 	
 	@Autowired
-	private GerenteService gerenteService;
+	private ClienteService clienteService;
 
 	@GetMapping
-	public Page<GerenteDto> listar(@RequestParam(required = false) String nomeGerente,
+	public Page<ClienteDto> listar(@RequestParam(required = false) String nomeCliente,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return gerenteService.listar(nomeGerente, paginacao);
+		return clienteService.listar(nomeCliente, paginacao);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<GerenteDto> detalhar(@PathVariable Long id) {
-		return gerenteService.detalharPorId(id);
+	public ResponseEntity<ClienteDto> detalhar(@PathVariable Long id) {
+		return clienteService.detalharPorId(id);
 	}
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<GerenteDto> cadastrar(@RequestBody @Valid GerenteForm gerenteForm,
+	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
 			UriComponentsBuilder uriBuilder) throws Exception {
-		return gerenteService.cadastrarGerente(gerenteForm, uriBuilder);
+		return clienteService.cadastrarCliente(clienteForm, uriBuilder);
 	}
 
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<GerenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid GerenteForm gerenteForm) {
-		return gerenteService.atualizar(id, gerenteForm);
+	public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteForm clienteForm) {
+		return clienteService.atualizar(id, clienteForm);
 	}
 	
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-		return gerenteService.removerGerente(id);
+		return clienteService.removerCliente(id);
 	}
 	
 	

@@ -16,5 +16,7 @@ public interface AgenciaRepository extends JpaRepository<Agencia, Long>{
 
 	Optional<Agencia> findByNomeAndNumeroAndNumeroPredio(String nome, String numero, Long numeroPredio);
 
+	Optional<Agencia> findByNumero(String agenciaNumero);
+
 
 }

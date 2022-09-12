@@ -1,35 +1,37 @@
 package com.byteBank.system.model;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("Gert")
-public class Gerente {
+public class Gerente extends Pessoa {
 
-	Pessoa pessoa;
-	StatusTrabalho status;
+	@Enumerated(EnumType.STRING)
+	StatusTrabalho status = StatusTrabalho.TRABALHANDO;
+	@ManyToOne
 	Agencia agencia;
+	@OneToMany
+	private List<Conta> conta = new ArrayList<>();
 	
-	public Gerente(StatusTrabalho status, Agencia agencia, String nome, String cpf, LocalDate dataNascimento, Integer idade) {
-		this.status = status;
+	public Gerente(Agencia agencia, String nome, String cpf, LocalDate dataNascimento) {
+		super (nome, cpf, dataNascimento);
 		this.agencia = agencia;
-		Pessoa pessoa = new Pessoa();
-		pessoa.setCpf(cpf);
-		pessoa.setDataNascimento(dataNascimento);
-		pessoa.setIdade(idade);
-		pessoa.setNome(nome);
-		this.pessoa = pessoa;
 	}
 	
-	public Pessoa getPessoa() {
-		return pessoa;
+	public Gerente() {
 	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
+	
 	public StatusTrabalho getStatus() {
 		return status;
 	}
@@ -42,4 +44,11 @@ public class Gerente {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
+	public List<Conta> getConta() {
+		return conta;
+	}
+	public void setConta(List<Conta> conta) {
+		this.conta = conta;
+	}
+	
 }

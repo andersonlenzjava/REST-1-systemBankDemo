@@ -2,20 +2,24 @@ package com.byteBank.system.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Conta {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Long numero;
 	private BigDecimal saldo = BigDecimal.ZERO;
-	Cliente cliente;
-	Gerente gerente;
 	private TipoConta tipoConta = TipoConta.CORRENTE;
 	
 	public Conta(Long numero, BigDecimal saldo, Cliente cliente, Gerente gerente) {
 		this.numero = numero;
 		this.saldo = saldo;
-		this.cliente = cliente;
-		this.gerente = gerente;
 	}
 	
 	public Long getId() {
@@ -35,18 +39,6 @@ public class Conta {
 	}
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	public Gerente getGerente() {
-		return gerente;
-	}
-	public void setGerente(Gerente gerente) {
-		this.gerente = gerente;
 	}
 	public TipoConta getTipoConta() {
 		return tipoConta;

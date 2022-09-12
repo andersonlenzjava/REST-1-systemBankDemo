@@ -1,30 +1,31 @@
 package com.byteBank.system.model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("Client")
-public class Cliente {
+public class Cliente extends Pessoa {
 
-	Pessoa pessoa;
-	Conta conta;
+	@OneToMany
+	private List<Conta> conta = new ArrayList<>();
 	
-	public Cliente(Pessoa pessoa, Conta conta) {
-		this.pessoa = pessoa;
-		this.conta = conta;
+	public Cliente(String nome, String cpf, LocalDate dataNascimento) {
+		super (nome, cpf, dataNascimento);
 	}
-	public Pessoa getPessoa() {
-		return pessoa;
+	
+	public Cliente() {
 	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-	public Conta getConta() {
+	
+	public List<Conta> getConta() {
 		return conta;
 	}
-	public void setConta(Conta conta) {
+	public void setConta(List<Conta> conta) {
 		this.conta = conta;
 	}
-
 }
