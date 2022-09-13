@@ -51,7 +51,7 @@ public class GerenteController {
 
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<GerenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid GerenteForm gerenteForm) {
+	public ResponseEntity<GerenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid GerenteForm gerenteForm) throws Exception {
 		return gerenteService.atualizar(id, gerenteForm);
 	}
 	

@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Transacao {
 
 	private Long id;
-	Conta contaOperadora;
-	Conta contaDestino;
+	private Conta contaOperadora;
+	private Conta contaDestino;
 	private Long numero;
 	private LocalDate dataHoraTransacao;
 	

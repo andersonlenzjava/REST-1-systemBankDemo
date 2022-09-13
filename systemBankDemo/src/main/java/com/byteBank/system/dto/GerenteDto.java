@@ -54,7 +54,7 @@ public class GerenteDto {
 		return gerentes.map(GerenteDto::new);
 	}
 
-	public static GerenteDto converterUmaAgencia(Gerente gerente) {
+	public static GerenteDto converterUmGerente(Gerente gerente) {
 		return new GerenteDto(gerente);
 	}
 

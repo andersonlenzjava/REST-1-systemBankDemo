@@ -1,7 +1,5 @@
 package com.byteBank.system.controller;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -22,52 +20,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.byteBank.system.dto.ClienteDto;
-import com.byteBank.system.form.ClienteForm;
-import com.byteBank.system.model.Conta;
-import com.byteBank.system.service.ClienteService;
+import com.byteBank.system.dto.ContaDto;
+import com.byteBank.system.form.ContaForm;
+import com.byteBank.system.service.ContaService;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClienteController {
+@RequestMapping("/conta")
+public class ContaController {
 	
 	@Autowired
-	private ClienteService clienteService;
+	private ContaService contaService;
 
 	@GetMapping
-	public Page<ClienteDto> listar(@RequestParam(required = false) String nomeCliente,
+	public Page<ContaDto> listar(@RequestParam(required = false) Long numeroConta,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return clienteService.listar(nomeCliente, paginacao);
+		return contaService.listar(numeroConta, paginacao);
 	}
-	
-	@GetMapping("/contas/{id}")
-	public List<Conta> listarContas(@PathVariable Long id) throws Exception {
-		return clienteService.listarContas(id);
-	}
-	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ClienteDto> detalhar(@PathVariable Long id) {
-		return clienteService.detalharPorId(id);
+	public ResponseEntity<ContaDto> detalhar(@PathVariable Long id) {
+		return contaService.detalharPorId(id);
 	}
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<ClienteDto> cadastrar(@RequestBody @Valid ClienteForm clienteForm,
+	public ResponseEntity<ContaDto> cadastrar(@RequestBody @Valid ContaForm contaForm,
 			UriComponentsBuilder uriBuilder) throws Exception {
-		return clienteService.cadastrarCliente(clienteForm, uriBuilder);
+		return contaService.cadastrarConta(contaForm, uriBuilder);
 	}
 
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteForm clienteForm) {
-		return clienteService.atualizar(id, clienteForm);
+	public ResponseEntity<ContaDto> atualizar(@PathVariable Long id, @RequestBody @Valid ContaForm contaForm) throws Exception {
+		return contaService.atualizar(id, contaForm);
 	}
 	
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-		return clienteService.removerCliente(id);
+		return contaService.removerCliente(id);
 	}
 	
 	

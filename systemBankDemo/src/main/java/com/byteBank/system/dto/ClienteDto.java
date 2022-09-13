@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import org.springframework.data.domain.Page;
 
 import com.byteBank.system.model.Cliente;
-import com.byteBank.system.model.Gerente;
-import com.byteBank.system.model.StatusTrabalho;
 
 public class ClienteDto {
 
@@ -40,7 +38,6 @@ public class ClienteDto {
 		return idade;
 	}
 	
-
 	public static Page<ClienteDto> converter(Page<Cliente> clientes) {
 		return clientes.map(ClienteDto::new);
 	}

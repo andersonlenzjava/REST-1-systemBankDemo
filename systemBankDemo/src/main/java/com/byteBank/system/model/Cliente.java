@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 public class Cliente extends Pessoa {
 
 	@OneToMany
-	private List<Conta> conta = new ArrayList<>();
+	private List<Conta> contas = new ArrayList<>();
 	
 	public Cliente(String nome, String cpf, LocalDate dataNascimento) {
 		super (nome, cpf, dataNascimento);
@@ -23,9 +23,9 @@ public class Cliente extends Pessoa {
 	}
 	
 	public List<Conta> getConta() {
-		return conta;
+		return contas;
 	}
-	public void setConta(List<Conta> conta) {
-		this.conta = conta;
+	public void setConta(List<Conta> contas) {
+		this.contas = contas;
 	}
 }

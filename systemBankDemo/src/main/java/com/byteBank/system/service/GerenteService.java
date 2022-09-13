@@ -3,8 +3,6 @@ package com.byteBank.system.service;
 import java.net.URI;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,10 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.byteBank.system.dto.AgenciaDto;
 import com.byteBank.system.dto.GerenteDto;
 import com.byteBank.system.form.GerenteForm;
-import com.byteBank.system.model.Agencia;
 import com.byteBank.system.model.Gerente;
 import com.byteBank.system.repository.AgenciaRepository;
 import com.byteBank.system.repository.GerenteRepository;
@@ -64,17 +60,17 @@ public class GerenteService {
 	public ResponseEntity<GerenteDto> detalharPorId(Long id) {
 		Optional<Gerente> gerente = gerenteRepository.findById(id);
 		if (gerente.isPresent()) {
-			return ResponseEntity.ok(GerenteDto.converterUmaAgencia(gerente.get()));
+			return ResponseEntity.ok(GerenteDto.converterUmGerente(gerente.get()));
 		}
 		return ResponseEntity.notFound().build();
 	}
 
 	// cadastrar
-	public ResponseEntity<GerenteDto> cadastrarGerente(@Valid GerenteForm gerenteForm, UriComponentsBuilder uriBuilder)
+	public ResponseEntity<GerenteDto> cadastrarGerente(GerenteForm gerenteForm, UriComponentsBuilder uriBuilder)
 			throws Exception {
 		Gerente gerente = gerenteForm.converter(agenciaRepository);
-		Optional<Gerente> gerenteOptional = gerenteRepository.findByNomeAndCpfAndDataNascimento(gerente.getNome(),
-				gerente.getCpf(), gerente.getDataNascimento());
+		Optional<Gerente> gerenteOptional = gerenteRepository.findByNomeOrCpf(gerente.getNome(),
+				gerente.getCpf());
 		if (gerenteOptional.isEmpty()) {
 			gerenteRepository.save(gerente);
 			URI uri = uriBuilder.path("/gerentes/{id}").buildAndExpand(gerente.getId()).toUri();
@@ -85,10 +81,10 @@ public class GerenteService {
 	}
 
 	// atualizar
-	public ResponseEntity<GerenteDto> atualizar(Long id, GerenteForm gerenteForm) {
-		Optional<Gerente> optionalgerente = gerenteRepository.findById(id);
-		if (optionalgerente.isPresent()) {
-			Gerente gerente = gerenteForm.atualizar(id, gerenteRepository, agenciaRepository);
+	public ResponseEntity<GerenteDto> atualizar(Long id, GerenteForm gerenteForm) throws Exception {
+		Optional<Gerente> optionalGerente = gerenteRepository.findById(id);
+		if (optionalGerente.isPresent()) {
+			Gerente gerente = gerenteForm.atualizar(optionalGerente.get(), agenciaRepository);
 			return ResponseEntity.ok(new GerenteDto(gerente));
 		}
 		return ResponseEntity.notFound().build();

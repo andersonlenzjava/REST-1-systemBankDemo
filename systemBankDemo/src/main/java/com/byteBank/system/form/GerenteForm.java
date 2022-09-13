@@ -49,33 +49,30 @@ public class GerenteForm {
 		this.agenciaNumero = agenciaNumero;
 	}
 
-	public Gerente converter(AgenciaRepository agenciaRepository) {
-		Optional<Agencia> agenciaOptional = agenciaRepository.findByNumero(this.agenciaNumero);
-		Agencia agencia = null;
-		Gerente gerente = null;
+	public Gerente converter(AgenciaRepository agenciaRepository) throws Exception {
+		Optional<Agencia> agenciaOptional = agenciaRepository.findByNumero(agenciaNumero);
+		Gerente gerente;
 		if (agenciaOptional.isPresent()) {
-			agencia = agenciaOptional.get();
+			Agencia agencia = agenciaOptional.get();
 			gerente = new Gerente(agencia, nome, cpf, dataNascimento);
 			return gerente;
 		} else {
-			return gerente;
+			throw new Exception("Agencia inesistente!");
 		}
 	}
 
-	public Gerente atualizar(Long id, GerenteRepository gerenteRepository, AgenciaRepository agenciaRepository) {
-		Gerente gerente = gerenteRepository.getReferenceById(id);
-
-		gerente.setNome(nome);
-		gerente.setCpf(cpf);
-		gerente.setDataNascimento(dataNascimento);
+	public Gerente atualizar(Gerente gerente, AgenciaRepository agenciaRepository) throws Exception {
 
 		Optional<Agencia> optionalAgencia = agenciaRepository.findByNumero(agenciaNumero);
 		if (optionalAgencia.isPresent()) {
 			Agencia agencia = optionalAgencia.get();
 			gerente.setAgencia(agencia);
+			gerente.setNome(nome);
+			gerente.setCpf(cpf);
+			gerente.setDataNascimento(dataNascimento);
+			return gerente;
 		} else {
-			gerente = null;
+			throw new Exception("Agencia inesistente");
 		}
-		return gerente;
 	}
 }

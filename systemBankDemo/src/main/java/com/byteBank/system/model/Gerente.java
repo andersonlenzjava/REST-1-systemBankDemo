@@ -1,8 +1,6 @@
 package com.byteBank.system.model;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +19,9 @@ public class Gerente extends Pessoa {
 	StatusTrabalho status = StatusTrabalho.TRABALHANDO;
 	@ManyToOne
 	Agencia agencia;
+	
 	@OneToMany
-	private List<Conta> conta = new ArrayList<>();
+	List<Conta> contas = new ArrayList<>();
 	
 	public Gerente(Agencia agencia, String nome, String cpf, LocalDate dataNascimento) {
 		super (nome, cpf, dataNascimento);
@@ -44,11 +43,10 @@ public class Gerente extends Pessoa {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
-	public List<Conta> getConta() {
-		return conta;
+	public List<Conta> getContas() {
+		return contas;
 	}
-	public void setConta(List<Conta> conta) {
-		this.conta = conta;
+	public void setContas(List<Conta> contas) {
+		this.contas = contas;
 	}
-	
 }

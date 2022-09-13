@@ -1,19 +1,14 @@
 package com.byteBank.system.form;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.byteBank.system.model.Agencia;
 import com.byteBank.system.model.Cliente;
-import com.byteBank.system.model.Gerente;
-import com.byteBank.system.repository.AgenciaRepository;
 import com.byteBank.system.repository.ClienteRepository;
-import com.byteBank.system.repository.GerenteRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ClienteForm {
@@ -47,8 +42,7 @@ public class ClienteForm {
 		return new Cliente(nome, cpf, dataNascimento);
 	}
 
-	public Cliente atualizar(Long id, ClienteRepository clienteRepository) {
-		Cliente cliente = clienteRepository.getReferenceById(id);
+	public Cliente atualizar(Cliente cliente, ClienteRepository clienteRepository) {
 		cliente.setNome(nome);
 		cliente.setCpf(cpf);
 		cliente.setDataNascimento(dataNascimento);
