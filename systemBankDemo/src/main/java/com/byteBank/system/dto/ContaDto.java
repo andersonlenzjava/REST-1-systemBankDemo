@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.data.domain.Page;
 
+import com.byteBank.system.model.Agencia;
 import com.byteBank.system.model.Conta;
 import com.byteBank.system.model.TipoConta;
 
@@ -13,11 +14,14 @@ public class ContaDto {
 	private Long numero;
 	private BigDecimal saldo;
 	private TipoConta tipoConta;
+	private Agencia agencia;
 
 	public ContaDto(Conta conta) {
+		this.id = conta.getId();
 		this.numero = conta.getNumero();
 		this.saldo = conta.getSaldo();
 		this.tipoConta = conta.getTipoConta();
+		this.agencia = conta.getAgencia();
 	}
 
 	public Long getId() {
@@ -50,6 +54,14 @@ public class ContaDto {
 
 	public void setTipoConta(TipoConta tipoConta) {
 		this.tipoConta = tipoConta;
+	}
+	
+	public String getAgencia() {
+		return agencia.getNumero();
+	}
+
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 
 	public static Page<ContaDto> converter(Page<Conta> contas) {

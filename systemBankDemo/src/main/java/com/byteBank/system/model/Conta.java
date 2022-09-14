@@ -21,10 +21,14 @@ public class Conta {
 	@ManyToOne
 	private Agencia agencia;
 	
-	public Conta(Long numero, TipoConta tipoConta, BigDecimal saldo, Agencia agencia) {	
+	public Conta(Long numero, BigDecimal saldo, TipoConta tipoConta, Agencia agencia) {	
 		this.numero = numero;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
+		this.agencia = agencia;
+	}
+	
+	public Conta() {
 	}
 	
 	public Long getId() {

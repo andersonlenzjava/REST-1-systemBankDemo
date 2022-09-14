@@ -22,8 +22,9 @@ public class ContaService {
 	@Autowired
 	private ContaRepository contaRepository;
 	
+	@Autowired
 	private AgenciaRepository agenciaRepository;
-
+		
 	// get
 	public Page<ContaDto> listar(Long numeroConta, Pageable paginacao) {
 		if (numeroConta == null) {
@@ -47,9 +48,9 @@ public class ContaService {
 	// cadastrar
 	public ResponseEntity<ContaDto> cadastrarConta(ContaForm contaForm, UriComponentsBuilder uriBuilder)
 			throws Exception {
-		Conta conta = contaForm.converter(agenciaRepository);
-		Optional<Conta> contaOptional = contaRepository.findByNumero(conta.getNumero());
+		Optional<Conta> contaOptional = contaRepository.findByNumero(contaForm.getNumero());
 		if (contaOptional.isEmpty()) {
+			Conta conta = contaForm.converter(agenciaRepository);
 			contaRepository.save(conta);
 			URI uri = uriBuilder.path("/conta/{id}").buildAndExpand(conta.getId()).toUri();
 			return ResponseEntity.created(uri).body(new ContaDto(conta));

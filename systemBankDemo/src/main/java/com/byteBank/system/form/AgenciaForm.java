@@ -10,7 +10,7 @@ import com.byteBank.system.model.Agencia;
 
 public class AgenciaForm {
 	
-	@NotNull @NotEmpty @Length(min = 5)
+	@NotNull @NotEmpty @Length(min = 5, max = 5)
 	public String numero;
 	
 	@NotNull @NotEmpty

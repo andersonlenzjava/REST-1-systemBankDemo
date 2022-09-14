@@ -31,9 +31,9 @@ public class AgenciaController {
 	private AgenciaService agenciaService;
 
 	@GetMapping
-	public Page<AgenciaDto> listar(@RequestParam(required = false) String nomeAgencia,
+	public Page<AgenciaDto> listar(@RequestParam(required = false) String numeroAgencia,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return agenciaService.listar(nomeAgencia, paginacao);
+		return agenciaService.listar(numeroAgencia, paginacao);
 	}
 
 	@GetMapping("/{id}")

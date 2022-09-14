@@ -24,13 +24,13 @@ public class AgenciaService {
 	private AgenciaRepository agenciaRepository;
 	
 	//get
-	public Page<AgenciaDto> listar(String nomeAgencia, Pageable paginacao) {
+	public Page<AgenciaDto> listar(String numeroAgencia, Pageable paginacao) {
 		
-		if (nomeAgencia == null) {
+		if (numeroAgencia == null) {
 			Page<Agencia> agencias = agenciaRepository.findAll(paginacao);
 			return AgenciaDto.converter(agencias);
 		} else {
-			Page<Agencia> agencias = agenciaRepository.findByNome(nomeAgencia, paginacao);
+			Page<Agencia> agencias = agenciaRepository.findByNumero(numeroAgencia, paginacao);
 			return AgenciaDto.converter(agencias);
 		}
 	}
