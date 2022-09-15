@@ -25,7 +25,6 @@ public class AgenciaService {
 	
 	//get
 	public Page<AgenciaDto> listar(String numeroAgencia, Pageable paginacao) {
-		
 		if (numeroAgencia == null) {
 			Page<Agencia> agencias = agenciaRepository.findAll(paginacao);
 			return AgenciaDto.converter(agencias);

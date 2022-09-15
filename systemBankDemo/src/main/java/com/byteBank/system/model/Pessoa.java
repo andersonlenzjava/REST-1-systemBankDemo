@@ -22,11 +22,15 @@ public abstract class Pessoa {
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
+	private Integer idade;
 	
 	public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+		System.out.println("MARCADOR " + dataNascimento);
+		this.idade = calculaIdade(dataNascimento);
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
+		System.out.println("MARCADOR");
 	}
 
 	public Pessoa() {
@@ -57,10 +61,14 @@ public abstract class Pessoa {
 		this.dataNascimento = dataNascimento;
 	}
 	public Integer getIdade() {
-		LocalDate hoje = LocalDate.now();
-		Period periodo = Period.between(getDataNascimento(), hoje);
-		Integer idade = periodo.getYears();
-		return idade;
+		return calculaIdade(this.dataNascimento);
 	}
-	
+	public void setIdade(Integer idade) {
+		this.idade = idade;
+	}
+
+	public Integer calculaIdade(LocalDate dataNascimento) {
+		Period idade = Period.between(dataNascimento, LocalDate.now());
+		return Integer.valueOf(idade.getYears());
+	}
 }

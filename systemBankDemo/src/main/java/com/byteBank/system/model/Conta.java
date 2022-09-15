@@ -21,11 +21,20 @@ public class Conta {
 	@ManyToOne
 	private Agencia agencia;
 	
-	public Conta(Long numero, BigDecimal saldo, TipoConta tipoConta, Agencia agencia) {	
+	@ManyToOne
+	private Gerente gerente;
+	
+	@ManyToOne
+	private Cliente cliente;
+	
+	public Conta(Long numero, BigDecimal saldo, TipoConta tipoConta, Agencia agencia, 
+			Gerente gerente, Cliente cliente) {	
 		this.numero = numero;
 		this.saldo = saldo;
 		this.tipoConta = tipoConta;
 		this.agencia = agencia;
+		this.gerente = gerente;
+		this.cliente = cliente;
 	}
 	
 	public Conta() {
@@ -61,5 +70,16 @@ public class Conta {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
-	
+	public Gerente getGerente() {
+		return gerente;
+	}
+	public void setGerente(Gerente gerente) {
+		this.gerente = gerente;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }

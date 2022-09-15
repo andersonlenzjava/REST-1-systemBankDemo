@@ -14,7 +14,9 @@ import com.byteBank.system.dto.ContaDto;
 import com.byteBank.system.form.ContaForm;
 import com.byteBank.system.model.Conta;
 import com.byteBank.system.repository.AgenciaRepository;
+import com.byteBank.system.repository.ClienteRepository;
 import com.byteBank.system.repository.ContaRepository;
+import com.byteBank.system.repository.GerenteRepository;
 
 @Service
 public class ContaService {
@@ -24,6 +26,12 @@ public class ContaService {
 	
 	@Autowired
 	private AgenciaRepository agenciaRepository;
+	
+	@Autowired
+	private GerenteRepository gerenteRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 		
 	// get
 	public Page<ContaDto> listar(Long numeroConta, Pageable paginacao) {
@@ -50,7 +58,7 @@ public class ContaService {
 			throws Exception {
 		Optional<Conta> contaOptional = contaRepository.findByNumero(contaForm.getNumero());
 		if (contaOptional.isEmpty()) {
-			Conta conta = contaForm.converter(agenciaRepository);
+			Conta conta = contaForm.converter(agenciaRepository, gerenteRepository, clienteRepository);
 			contaRepository.save(conta);
 			URI uri = uriBuilder.path("/conta/{id}").buildAndExpand(conta.getId()).toUri();
 			return ResponseEntity.created(uri).body(new ContaDto(conta));

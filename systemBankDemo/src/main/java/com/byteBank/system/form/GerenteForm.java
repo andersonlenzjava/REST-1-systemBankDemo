@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.Length;
 import com.byteBank.system.model.Agencia;
 import com.byteBank.system.model.Gerente;
 import com.byteBank.system.repository.AgenciaRepository;
-import com.byteBank.system.repository.GerenteRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class GerenteForm {

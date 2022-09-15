@@ -9,10 +9,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.byteBank.system.model.Agencia;
+import com.byteBank.system.model.Cliente;
 import com.byteBank.system.model.Conta;
+import com.byteBank.system.model.Gerente;
 import com.byteBank.system.model.TipoConta;
 import com.byteBank.system.repository.AgenciaRepository;
-import com.byteBank.system.service.GerenteService;
+import com.byteBank.system.repository.ClienteRepository;
+import com.byteBank.system.repository.GerenteRepository;
 
 public class ContaForm {
 
@@ -27,6 +30,14 @@ public class ContaForm {
 	@NotNull
 	@Length(min = 5, max = 5)
 	private String agenciaNumero;
+	
+	@NotEmpty
+	@NotNull
+	private String cpfGerente;
+
+	@NotEmpty
+	@NotNull
+	private String cpfCliente;
 	
 	public Long getNumero() {
 		return numero;
@@ -52,15 +63,30 @@ public class ContaForm {
 	public void setAgenciaNumero(String agenciaNumero) {
 		this.agenciaNumero = agenciaNumero;
 	}
+	public String getCpfCliente() {
+		return cpfCliente;
+	}
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
+	}
+	public String getCpfGerente() {
+		return cpfGerente;
+	}
+	public void setCpfGerente(String cpfGerente) {
+		this.cpfGerente = cpfGerente;
+	}
 	
-	public Conta converter(AgenciaRepository agenciaRepository) throws Exception {
-		Conta conta;
+	public Conta converter(AgenciaRepository agenciaRepository, 
+			GerenteRepository gerenteRepository, ClienteRepository clienteRepository) throws Exception {
 		Optional<Agencia> optionalAgencia = agenciaRepository.findByNumero(agenciaNumero);
-		if (optionalAgencia.isPresent()) {
+		Optional<Gerente> optionalGerente = gerenteRepository.findByCpf(cpfGerente);
+		Optional<Cliente> optionalCliente = clienteRepository.findByCpf(cpfCliente);
+		
+		if (optionalAgencia.isPresent() && optionalGerente.isPresent() && optionalCliente.isPresent()) {
 			Agencia agencia = optionalAgencia.get();
-			System.out.println(agencia.getNumero());
-			conta = new Conta(numero, saldo, tipoConta, agencia);
-			return conta;
+			Gerente gerente = optionalGerente.get();
+			Cliente cliente = optionalCliente.get();
+			return new Conta(numero, saldo, tipoConta, agencia, gerente, cliente);
 		} else {
 			throw new Exception("Agencia não encontrada");
 		}

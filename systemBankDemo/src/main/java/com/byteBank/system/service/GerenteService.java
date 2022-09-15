@@ -25,26 +25,6 @@ public class GerenteService {
 	@Autowired
 	private AgenciaRepository agenciaRepository;
 
-	public void criarConta() {
-
-	}
-
-	public void apagarTransacao() {
-
-	}
-
-	public void editarTransacao() {
-
-	}
-
-	public void relatorioConta() {
-
-	}
-
-	public void RelatorioDinamico() {
-
-	}
-
 	// get
 	public Page<GerenteDto> listar(String nomeGerente, Pageable paginacao) {
 		if (nomeGerente == null) {
@@ -59,7 +39,7 @@ public class GerenteService {
 	// get id
 	public ResponseEntity<GerenteDto> detalharPorId(Long id) {
 		Optional<Gerente> gerente = gerenteRepository.findById(id);
-		if (gerente.isPresent()) {
+		if (gerente.isPresent()) {	
 			return ResponseEntity.ok(GerenteDto.converterUmGerente(gerente.get()));
 		}
 		return ResponseEntity.notFound().build();

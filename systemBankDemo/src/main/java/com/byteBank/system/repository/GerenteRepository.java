@@ -2,9 +2,6 @@ package com.byteBank.system.repository;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +18,6 @@ public interface GerenteRepository extends JpaRepository<Gerente, Long>{
 
 	Optional<Gerente> findByCpf(String gerenteCpf);
 
-	Optional<Gerente> findByNomeAndCpf(@NotNull @NotEmpty String gerenteNome, String gerenteCpf);
+	Optional<Gerente> findByNomeAndCpf(String gerenteNome, String gerenteCpf);
 
 }

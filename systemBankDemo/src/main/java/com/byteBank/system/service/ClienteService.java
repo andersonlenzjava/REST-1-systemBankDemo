@@ -18,12 +18,16 @@ import com.byteBank.system.form.ClienteForm;
 import com.byteBank.system.model.Cliente;
 import com.byteBank.system.model.Conta;
 import com.byteBank.system.repository.ClienteRepository;
+import com.byteBank.system.repository.ContaRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private ContaRepository contaRepository;
 
 	// get
 	public Page<ClienteDto> listar(String nomeCliente, Pageable paginacao) {
@@ -39,7 +43,7 @@ public class ClienteService {
 	// get id
 	public ResponseEntity<ClienteDto> detalharPorId(Long id) {
 		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if (cliente.isPresent()) {
+		if (cliente.isPresent()) {	
 			return ResponseEntity.ok(ClienteDto.converterUmCliente(cliente.get()));
 		}
 		return ResponseEntity.notFound().build();
@@ -52,6 +56,7 @@ public class ClienteService {
 		Optional<Cliente> clienteOptional = clienteRepository.findByNomeOrCpf(cliente.getNome(),
 				cliente.getCpf());
 		if (clienteOptional.isEmpty()) {
+			System.out.println("teste");
 			clienteRepository.save(cliente);
 			URI uri = uriBuilder.path("/gerentes/{id}").buildAndExpand(cliente.getId()).toUri();
 			return ResponseEntity.created(uri).body(new ClienteDto(cliente));
@@ -85,7 +90,7 @@ public class ClienteService {
 		Optional<Cliente> optinalCliente = clienteRepository.findById(id);
 		if (optinalCliente.isPresent()) {
 			Cliente cliente = optinalCliente.get();
-			return cliente.getConta();
+			return contaRepository.findByCliente(cliente);
 		} else {
 			throw new Exception("Cliente não existente");			
 		}
