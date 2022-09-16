@@ -58,9 +58,9 @@ public class TransacaoController {
 	
 	//retorna as transacoes por numero da conta 
 	@GetMapping
-	public Page<TransferirDto> listarPorConta(@RequestParam(required = false) Long numero,
+	public Page<TransferirDto> listarPorConta(@RequestParam(required = false) Long numeroConta,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return transacaoService.listarPorConta(numero, paginacao);
+		return transacaoService.listarPorConta(numeroConta, paginacao);
 	}
 
 	//retorna por transacao 

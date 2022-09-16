@@ -13,9 +13,9 @@ import com.byteBank.system.model.Transacao;
 @Repository
 public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
 
-	@Query("SELECT u FROM Transacao u WHERE u.contaOperadora.numero = :numero "
-			+ "OR u.contaDestino.numero = :numero")
-	Page<Transacao> findByContaNumero(@Param("numero") Long numero, Pageable paginacao);
+	@Query("SELECT u FROM Transacao u WHERE u.contaOperadora.numero = :numeroConta "
+			+ "OR u.contaDestino.numero = :numeroConta")
+	Page<Transacao> findByContaNumero(@Param("numeroConta") Long numeroConta, Pageable paginacao);
 	
 	@Query("SELECT u FROM Transacao u WHERE u.valor >= :valorTransacao")
 	Page<Transacao> findMaiorQue(BigDecimal valorTransacao, Pageable paginacao);

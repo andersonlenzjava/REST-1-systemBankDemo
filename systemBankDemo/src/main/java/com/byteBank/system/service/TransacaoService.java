@@ -128,12 +128,12 @@ public class TransacaoService {
 	}
 
 	//ListarPorConta
-	public Page<TransferirDto> listarPorConta(Long numero, Pageable paginacao) {
-		if (numero == null) {
+	public Page<TransferirDto> listarPorConta(Long numeroConta, Pageable paginacao) {
+		if (numeroConta == null) {
 			Page<Transacao> transacoes = transacaoRepository.findAll(paginacao);
 			return TransferirDto.converterTrasacoes(transacoes);
 		} else {
-			Page<Transacao> transacoes = transacaoRepository.findByContaNumero(numero, paginacao);
+			Page<Transacao> transacoes = transacaoRepository.findByContaNumero(numeroConta, paginacao);
 			return TransferirDto.converterTrasacoes(transacoes);
 		}
 	}
