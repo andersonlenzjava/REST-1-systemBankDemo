@@ -25,7 +25,7 @@ public class ContaDto {
 		this.tipoConta = conta.getTipoConta();
 		this.numeroAgencia = conta.getAgencia().getNumero();
 		this.nomeGerente = conta.getGerente().getNome();
-		this.numeroAgencia = conta.getCliente().getNome();
+		this.nomeCliente = conta.getCliente().getNome();
 	}
 
 	public Long getId() {

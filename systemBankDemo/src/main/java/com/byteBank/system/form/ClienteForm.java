@@ -46,6 +46,7 @@ public class ClienteForm {
 		cliente.setNome(nome);
 		cliente.setCpf(cpf);
 		cliente.setDataNascimento(dataNascimento);
+		clienteRepository.save(cliente);
 		return cliente;
 	}
 }

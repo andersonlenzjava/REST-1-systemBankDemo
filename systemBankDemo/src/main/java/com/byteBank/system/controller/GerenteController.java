@@ -49,7 +49,7 @@ public class GerenteController {
 		return gerenteService.cadastrarGerente(gerenteForm, uriBuilder);
 	}
 
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<GerenteDto> atualizar(@PathVariable Long id, @RequestBody @Valid GerenteForm gerenteForm) throws Exception {
 		return gerenteService.atualizar(id, gerenteForm);

@@ -13,7 +13,7 @@ public class AgenciaDto {
 	public String cep;
 	public Long numeroPredio;
 	
-	
+
 	public AgenciaDto(Agencia agencia) {
 		this.id = agencia.getId();
 		this.numero = agencia.getNumero();

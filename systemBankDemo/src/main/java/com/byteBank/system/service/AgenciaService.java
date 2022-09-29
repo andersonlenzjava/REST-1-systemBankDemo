@@ -58,6 +58,23 @@ public class AgenciaService {
 		}
 	}
 
+	//atualizar
+	public ResponseEntity<AgenciaDto> atualizarAgencia(Long id, AgenciaForm agenciaForm,
+			UriComponentsBuilder uriBuilder)  {
+		Optional<Agencia> agenciaOptional = agenciaRepository.findById(id);
+		if(agenciaOptional.isPresent()) {
+			Agencia agencia = agenciaOptional.get();
+			agencia.setCep(agenciaForm.getCep());
+			agencia.setNome(agenciaForm.getNome());
+			agencia.setNumero(agenciaForm.getNumero());
+			agencia.setNumeroPredio(agenciaForm.getNumeroPredio());
+			agencia.setRua(agenciaForm.getRua());
+			
+			return ResponseEntity.ok(new AgenciaDto(agencia));
+		} 
+		return ResponseEntity.notFound().build();
+	}
+
 	//deletar 
 	public ResponseEntity<?> removerAgencia(Long id) {
 		Optional<Agencia> optinalAgencia = agenciaRepository.findById(id);
@@ -67,4 +84,5 @@ public class AgenciaService {
 		}
 		return ResponseEntity.notFound().build();
 	}
+
 }

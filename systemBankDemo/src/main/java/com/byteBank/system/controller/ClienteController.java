@@ -58,7 +58,7 @@ public class ClienteController {
 		return clienteService.cadastrarCliente(clienteForm, uriBuilder);
 	}
 
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id, @RequestBody @Valid ClienteForm clienteForm) {
 		return clienteService.atualizar(id, clienteForm);

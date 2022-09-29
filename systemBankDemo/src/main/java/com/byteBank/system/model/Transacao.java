@@ -27,14 +27,14 @@ public class Transacao {
 	@Enumerated(EnumType.STRING)
 	private TipoOperacao tipoOperacao;
 	private BigDecimal valor;
-	private LocalDate dataHoraTransacao;
+	private LocalDate dataTransacao;
 	
 	public Transacao(Conta contaOperadora, Conta contaDestino, TipoOperacao tipoOperacao, BigDecimal valor, LocalDate dataHoraTransacao) {
 		this.contaOperadora = contaOperadora;
 		this.contaDestino = contaDestino;
 		this.tipoOperacao = tipoOperacao;
 		this.valor = valor;
-		this.dataHoraTransacao = dataHoraTransacao;
+		this.dataTransacao = dataHoraTransacao;
 	}
 	
 	public Transacao() {
@@ -71,9 +71,9 @@ public class Transacao {
 		this.valor = valor;
 	}
 	public LocalDate getDataHoraTransacao() {
-		return dataHoraTransacao;
+		return dataTransacao;
 	}
 	public void setDataHoraTransacao(LocalDate dataHoraTransacao) {
-		this.dataHoraTransacao = dataHoraTransacao;
+		this.dataTransacao = dataHoraTransacao;
 	}
 }

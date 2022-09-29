@@ -49,7 +49,7 @@ public class ContaController {
 		return contaService.cadastrarConta(contaForm, uriBuilder);
 	}
 
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<ContaDto> atualizar(@PathVariable Long id, @RequestBody @Valid ContaForm contaForm) throws Exception {
 		return contaService.atualizar(id, contaForm);

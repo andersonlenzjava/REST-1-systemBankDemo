@@ -19,7 +19,7 @@ public class AgenciaForm {
 	@NotNull @NotEmpty
 	public String rua;
 	
-	@NotNull @NotEmpty @Length(min = 5, max = 10)
+	@NotNull @NotEmpty @Length(min = 5, max = 8)
 	public String cep;
 	
 	@Positive 
@@ -40,6 +40,21 @@ public class AgenciaForm {
 	}
 	public void setNumeroPredio(Long numeroPredio) {
 		this.numeroPredio = numeroPredio;
+	}
+	public String getNumero() {
+		return numero;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public String getRua() {
+		return rua;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public Long getNumeroPredio() {
+		return numeroPredio;
 	}
 	public Agencia converter() {
 		Agencia agencia = new Agencia(numero, nome, rua, cep, numeroPredio);			
