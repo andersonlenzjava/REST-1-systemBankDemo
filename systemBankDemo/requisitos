@@ -1,0 +1,21 @@
+Este sistema consiste em um mini banco demo. 
+
+Este banco conta com as seguintes entidades:
+
+Conta, Pessoa, Cliente, Gernete, Agencia e Transacao.
+
+Cliente e Gerente herdam alguns métodos e atributos de Pessoa. 
+
+Cada conta possui uma Agencia, um Gerente e um Cliente. 
+
+Cada gerente possui uma agencia. 
+
+Cada transação é composta por duas contas, uma que realiza a operação e uma que recebe, e o valor da transação.
+
+Existem operações de deposito, saque que são referidas a mesma conta, e operação de transferir.
+
+
+O gerente possui o poder de desfazer uma transação.
+
+É possível filtrar as transações por valor. 
+
